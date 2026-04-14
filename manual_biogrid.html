@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioGrid - Dossier Oficial</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-dark: #0f172a;
+            --brand-primary: #1e40af;
+            --brand-accent: #3b82f6;
+            --brand-light: #eff6ff;
+            --text-main: #334155;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg-page: #f8fafc;
+            --border: #e2e8f0;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            display: flex;
+            line-height: 1.7;
+        }
+
+        /* ================= SIDEBAR (MENÚ LATERAL) ================= */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--brand-dark);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            padding: 30px 25px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-brand i {
+            color: var(--brand-accent);
+        }
+
+        .sidebar-nav {
+            padding: 25px 15px;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 20px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: white;
+            border-left: 4px solid var(--brand-accent);
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.75rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        .sidebar-footer span {
+            color: white;
+            font-weight: 600;
+            display: block;
+            margin-top: 5px;
+            font-size: 0.85rem;
+        }
+
+        /* ================= CONTENIDO PRINCIPAL ================= */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            padding: 50px;
+            max-width: 1200px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--brand-primary) 0%, #172554 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.03)" stroke-width="2" fill="none"/></svg>') repeat;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #bfdbfe;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Secciones */
+        section {
+            margin-bottom: 70px;
+            scroll-margin-top: 40px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--brand-dark);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-title i {
+            color: var(--brand-accent);
+            background: var(--brand-light);
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+
+        p.lead {
+            font-size: 1.1rem;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        /* SIMULACIONES VISUALES CON CSS */
+        .ui-mockup {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            margin: 30px 0;
+        }
+
+        .ui-header {
+            background: #f1f5f9;
+            padding: 12px 20px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.r {
+            background: #ef4444;
+        }
+
+        .dot.y {
+            background: #f59e0b;
+        }
+
+        .dot.g {
+            background: #10b981;
+        }
+
+        /* Mockup Mapa */
+        .map-mockup {
+            height: 350px;
+            background: #e0e7ff;
+            position: relative;
+            background-image: radial-gradient(#93c5fd 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .marker {
+            position: absolute;
+            font-size: 26px;
+            filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.3));
+        }
+
+        .m-tree {
+            color: var(--success);
+            top: 30%;
+            left: 25%;
+        }
+
+        .m-light {
+            color: var(--warning);
+            top: 45%;
+            left: 55%;
+        }
+
+        .m-tree2 {
+            color: var(--success);
+            top: 65%;
+            left: 40%;
+        }
+
+        .map-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 220px;
+            font-size: 0.9rem;
+        }
+
+        /* Mockup Consola Carga */
+        .console-mockup {
+            background: #0f172a;
+            padding: 20px;
+            color: #4ade80;
+            font-family: monospace;
+            font-size: 0.95rem;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .c-err {
+            color: #f87171;
+        }
+
+        .c-warn {
+            color: #fbbf24;
+        }
+
+        .c-sys {
+            color: #94a3b8;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: #f8fafc;
+            padding: 15px;
+            text-align: left;
+            color: var(--brand-dark);
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tag {
+            background: #dcfce7;
+            color: #166534;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .tag.alert {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Footer Autoría */
+        .author-footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 50px;
+            border-top: 1px solid var(--border);
+            color: #64748b;
+        }
+
+        .stamp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--brand-dark);
+            background: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* ================= REGLAS DE IMPRESIÓN (PDF Perfecto) ================= */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .hero {
+                padding: 80px 40px;
+                border-radius: 0;
+                box-shadow: none;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .ui-mockup,
+            .console-mockup,
+            .tag,
+            .section-title i {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            section {
+                page-break-inside: avoid;
+                margin-bottom: 40px;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <i class="fas fa-layer-group"></i> BIOGRID
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#inicio" class="nav-item active"><i class="fas fa-home"></i> Visión General</a>
+            <a href="#geovisor" class="nav-item"><i class="fas fa-satellite-dish"></i> Geovisor</a>
+            <a href="#carga" class="nav-item"><i class="fas fa-cloud-upload-alt"></i> Motor de Carga</a>
+            <a href="#inventario" class="nav-item"><i class="fas fa-database"></i> Inventario</a>
+            <a href="#inspecciones" class="nav-item"><i class="fas fa-clipboard-check"></i> Inspecciones</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            Arquitectura y Diseño de Software
+            <span>Ing. Diego Mauricio Palacios Castro</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <section id="inicio">
+            <div class="hero">
+                <h1>Plataforma BioGrid</h1>
+                <p>El estándar tecnológico a nivel mundial para la gestión territorial, inventario inteligente y control
+                    operativo de infraestructura georreferenciada.</p>
+            </div>
+            <p class="lead"><strong>BioGrid no es solo un mapa, es el centro de control estratégico de su
+                    operación.</strong> Diseñado para manejar redes de alumbrado e infraestructura vegetal, centraliza
+                la captura de datos GPS, bloquea la duplicidad y garantiza la trazabilidad técnica a gran escala.</p>
+        </section>
+
+        <section id="geovisor">
+            <div class="section-title">
+                <i class="fas fa-map-marked-alt"></i>
+                <h2>Geovisor y Control Espacial</h2>
+            </div>
+            <p>La inteligencia territorial en tiempo real. El Geovisor renderiza los activos registrados sobre un mapa
+                dinámico, permitiendo a los directivos y operativos tomar decisiones basadas en la densidad de
+                infraestructura.</p>
+
+            <div class="ui-mockup">
+                <div class="ui-header">
+                    <div class="dot r"></div>
+                    <div class="dot y"></div>
+                    <div class="dot g"></div>
+                </div>
+                <div class="map-mockup">
+                    <i class="fas fa-tree marker m-tree"></i>
+                    <i class="fas fa-lightbulb marker m-light"></i>
+                    <i class="fas fa-tree marker m-tree2"></i>
+                    <div class="map-panel">
+                        <strong>Capas Activas</strong>
+                        <div style="margin-top: 10px;"><span style="color:var(--success)"><i
+                                    class="fas fa-check-square"></i> Flora Urbana</span></div>
+                        <div style="margin-top: 5px;"><span style="color:var(--warning)"><i
+                                    class="fas fa-check-square"></i> Luminarias LED/Sodio</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <section id="carga">
+            <div class="section-title">
+                <i class="fas fa-microchip"></i>
+                <h2>Motor de Carga Masiva (Data Sync)</h2>
+            </div>
+            <p>El algoritmo de BioGrid permite inyectar cientos de coordenadas directamente desde archivos CSV
+                recolectados en campo, ejecutando validaciones de redundancia y cruzando en milisegundos la latitud y
+                longitud con el territorio.</p>
+
+            <div class="ui-mockup">
+                <div class="ui-header">
+                    <div class="dot r"></div>
+                    <div class="dot y"></div>
+                    <div class="dot g"></div>
+                    <span style="font-size: 0.8rem; color: #64748b; margin-left: 10px;">Consola de Integración</span>
+                </div>
+                <div class="console-mockup">
+                    <span class="c-sys">> Validando archivo: levantamiento_terreno_v2.csv...</span><br>
+                    <span class="c-sys">> Se encontraron 101 líneas. Ejecutando ST_Contains()...</span><br>
+                    > Fila 1 (ARB-001): Guardado exitoso. Coordenada cruzada.<br>
+                    > Fila 2 (LUM-001): Guardado exitoso.<br>
+                    <span class="c-warn">> Fila 3 (ARB-002): Bloqueado por restricción Unique (Duplicado).</span><br>
+                    > Fila 4 (ARB-003): Guardado exitoso.<br>
+                    <span class="c-sys">> [================> ] 100% Completado.</span><br>
+                    <span
+                        style="color: #fff; background: var(--success); padding: 2px 5px; border-radius: 3px; display: inline-block; margin-top: 5px;">ÉXITO:
+                        Lote sincronizado en la base de datos principal.</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="inventario">
+            <div class="section-title">
+                <i class="fas fa-server"></i>
+                <h2>Matriz de Inventario</h2>
+            </div>
+            <p>Organización estructurada. Los elementos se almacenan en una matriz relacional estricta, donde se puede
+                auditar su identificador único (Placa), coordenadas exactas y características asociadas a catálogos
+                dinámicos.</p>
+
+            <div class="ui-mockup" style="padding: 10px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Placa Única</th>
+                            <th>Tipo Elemento</th>
+                            <th>Característica</th>
+                            <th>Municipio Base</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ARB-NEI-001</strong></td>
+                            <td><i class="fas fa-tree" style="color:var(--success)"></i> Especie Arbórea</td>
+                            <td>Oití</td>
+                            <td>Cód: 41001</td>
+                            <td><span class="tag">Operativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>LUM-NEI-014</strong></td>
+                            <td><i class="fas fa-lightbulb" style="color:var(--warning)"></i> Infraestructura</td>
+                            <td>LED 150W</td>
+                            <td>Cód: 41001</td>
+                            <td><span class="tag">Operativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ARB-NEI-002</strong></td>
+                            <td><i class="fas fa-tree" style="color:var(--success)"></i> Especie Arbórea</td>
+                            <td>Chiminango</td>
+                            <td>Cód: 41001</td>
+                            <td><span class="tag alert">Requiere Poda</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="inspecciones">
+            <div class="section-title">
+                <i class="fas fa-shield-alt"></i>
+                <h2>Trazabilidad Operativa (Inspecciones)</h2>
+            </div>
+            <p>El valor agregado empresarial de BioGrid. Cada placa física cuenta con una bitácora inmutable donde se
+                registran inspecciones, mantenimiento preventivo y novedades, garantizando el control de contratistas y
+                cuadrillas en terreno.</p>
+        </section>
+
+        <footer class="author-footer">
+            <div class="stamp">
+                <i class="fas fa-user-tie"></i> Ing. Diego Mauricio Palacios Castro
+            </div>
+            <p><strong>Especialista en Software, Diseño de Aplicaciones y Administrador de Bases de Datos</strong></p>
+            <p style="margin-top: 10px;">BioGrid Architecture &copy; 2026. Todos los derechos reservados.<br>Documento
+                técnico generado para escalabilidad a nivel corporativo y mundial.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', function () {
+                navItems.forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
